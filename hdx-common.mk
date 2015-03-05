@@ -147,6 +147,9 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += qcmediaplayer
 
+# Torch
+PRODUCT_PACKAGES += Torch
+
 # Wifi
 #PRODUCT_PACKAGES += \
 #    libnetcmdiface \
