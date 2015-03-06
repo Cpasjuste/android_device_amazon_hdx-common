@@ -1,24 +1,27 @@
-project frameworks/native/services
-diff -Naur a/surfaceflinger/DisplayDevice.cpp b/surfaceflinger/DisplayDevice.cpp
---- a/surfaceflinger/DisplayDevice.cpp	2015-02-28 16:35:20.992560000 +0000
-+++ b/surfaceflinger/DisplayDevice.cpp	2015-02-28 18:41:03.728762000 +0000
-@@ -432,7 +432,11 @@
-     if (!frame.isValid()) {
-         // the destination frame can be invalid if it has never been set,
-         // in that case we assume the whole display frame.
--        if ((mHardwareOrientation/90) & DisplayState::eOrientationSwapMask) {
-+        char value[PROPERTY_VALUE_MAX];
-+        property_get("ro.sf.hwrotation", value, "0");
-+        int additionalRotation = atoi(value);
-+
-+        if (additionalRotation == 90 || additionalRotation == 270) {
-             frame = Rect(h, w);
-         } else {
-             frame = Rect(w, h);
-diff -Naur a-surfaceflinger/SurfaceFlinger.cpp b-surfaceflinger/SurfaceFlinger.cpp
---- a/surfaceflinger/SurfaceFlinger.cpp	2015-02-28 17:03:02.828605000 +0000
-+++ b/surfaceflinger/SurfaceFlinger.cpp	2015-02-28 18:03:10.116701000 +0000
-@@ -756,7 +756,10 @@
+diff --cc services/surfaceflinger/DisplayDevice.cpp
+index 5f765bd,623b17c..0000000
+--- a/services/surfaceflinger/DisplayDevice.cpp
++++ b/services/surfaceflinger/DisplayDevice.cpp
+@@@ -432,7 -416,11 +432,11 @@@ void DisplayDevice::setProjection(int o
+      if (!frame.isValid()) {
+          // the destination frame can be invalid if it has never been set,
+          // in that case we assume the whole display frame.
+-         if ((mHardwareOrientation/90) & DisplayState::eOrientationSwapMask) {
++         char value[PROPERTY_VALUE_MAX];
++         property_get("ro.sf.hwrotation", value, "0");
+ -        int additionalRot = atoi(value);
+++        int additionalRotation = atoi(value);
++ 
+ -        if (additionalRot == 90 || additionalRot == 270) {
+++        if (additionalRotation == 90 || additionalRotation == 270) {
+              frame = Rect(h, w);
+          } else {
+              frame = Rect(w, h);
+diff --git a/services/surfaceflinger/SurfaceFlinger.cpp b/services/surfaceflinger/SurfaceFlinger.cpp
+index e7c4716..d68bd66 100644
+--- a/services/surfaceflinger/SurfaceFlinger.cpp
++++ b/services/surfaceflinger/SurfaceFlinger.cpp
+@@ -756,7 +756,10 @@ status_t SurfaceFlinger::getDisplayInfo(const sp<IBinder>& display, DisplayInfo*
          info->orientation = 0;
      }
  
@@ -26,7 +29,7 @@ diff -Naur a-surfaceflinger/SurfaceFlinger.cpp b-surfaceflinger/SurfaceFlinger.c
 +	char value[PROPERTY_VALUE_MAX];
 +    property_get("ro.sf.hwrotation", value, "0");
 +    int additionalRot = atoi(value) / 90;
-+    //int additionalRot = mDisplays[0]->getHardwareOrientation() / 90;
++
      if ((type == DisplayDevice::DISPLAY_PRIMARY) && (additionalRot & DisplayState::eOrientationSwapMask)) {
          info->h = hwc.getWidth(type);
          info->w = hwc.getHeight(type);
