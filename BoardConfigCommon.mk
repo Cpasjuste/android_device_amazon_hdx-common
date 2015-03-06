@@ -93,7 +93,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 #TARGET_USES_POST_PROCESSING := true <- NO
 
 # Power
-#TARGET_POWERHAL_VARIANT := qcom
+TARGET_POWERHAL_VARIANT := qcom
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true

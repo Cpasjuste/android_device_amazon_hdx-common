@@ -255,7 +255,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	telephony.sms.receive=true \
 	keyguard.ori.timeout=350
 #	ro.camera.model=Kindle Fire HDX 7" \
-
 #	DISABLE calfiles as audio volume is too loud
 #	persist.audio.calfile0=/etc/acdbdata/THOR/Bluetooth_cal.acdb \
 #	persist.audio.calfile1=/etc/acdbdata/THOR/General_cal.acdb \
