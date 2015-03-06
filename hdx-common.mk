@@ -57,7 +57,7 @@ PRODUCT_PACKAGES += \
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
-    audio_policy.msm8974 \
+    audio_policy.default \
     audio.primary.msm8974 \
     audio.r_submix.default \
     audio.usb.default \
@@ -252,17 +252,29 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.ril.usb.port.qmi=qmi_usb \
 	ro.ril.usb.port.rmnet=rmnet_usb \
 	telephony.sms.receive=true \
-	keyguard.ori.timeout=350
-#	ro.camera.model=Kindle Fire HDX 7" \
+	keyguard.ori.timeout=350 
 
-#	DISABLE calfiles as audio volume is too loud
-#	persist.audio.calfile0=/etc/acdbdata/THOR/Bluetooth_cal.acdb \
-#	persist.audio.calfile1=/etc/acdbdata/THOR/General_cal.acdb \
-#	persist.audio.calfile2=/etc/acdbdata/THOR/Global_cal.acdb \
-#	persist.audio.calfile3=/etc/acdbdata/THOR/Handset_cal.acdb \
-#	persist.audio.calfile4=/etc/acdbdata/THOR/Hdmi_cal.acdb \
-#	persist.audio.calfile5=/etc/acdbdata/THOR/Headset_cal.acdb \
-#	persist.audio.calfile6=/etc/acdbdata/THOR/Speaker_cal.acdb \
+ifeq ($(TARGET_DEVICE),thor)
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.audio.calfile0=/etc/acdbdata/THOR/Bluetooth_cal.acdb \
+	persist.audio.calfile1=/etc/acdbdata/THOR/General_cal.acdb \
+	persist.audio.calfile2=/etc/acdbdata/THOR/Global_cal.acdb \
+	persist.audio.calfile3=/etc/acdbdata/THOR/Handset_cal.acdb \
+	persist.audio.calfile4=/etc/acdbdata/THOR/Hdmi_cal.acdb \
+	persist.audio.calfile5=/etc/acdbdata/THOR/Headset_cal.acdb \
+	persist.audio.calfile6=/etc/acdbdata/THOR/Speaker_cal.acdb
+endif
+ifeq ($(TARGET_DEVICE),apollo)
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.audio.calfile0=/etc/acdbdata/APOLLO/Bluetooth_cal.acdb \
+	persist.audio.calfile1=/etc/acdbdata/APOLLO/General_cal.acdb \
+	persist.audio.calfile2=/etc/acdbdata/APOLLO/Global_cal.acdb \
+	persist.audio.calfile3=/etc/acdbdata/APOLLO/Handset_cal.acdb \
+	persist.audio.calfile4=/etc/acdbdata/APOLLO/Hdmi_cal.acdb \
+	persist.audio.calfile5=/etc/acdbdata/APOLLO/Headset_cal.acdb \
+	persist.audio.calfile6=/etc/acdbdata/APOLLO/Speaker_cal.acdb
+endif
+
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
