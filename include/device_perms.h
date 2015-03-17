@@ -21,7 +21,13 @@
     { "persist.ril.stat.reboot",       AID_RADIO,    0 }, \
     { "persist.ril.stat.usb.reset",    AID_RADIO,    0 }, \
     { "persist.ril.stat.reboot",    AID_RADIO,    0 }, \
-    { "persist.ril.stat.lastboot",    AID_RADIO,    0 }, \
-    { "persist.ril.stat.usb.reset",    AID_RADIO,    0 },
+    { "persist.ril.stat.lastboot",    AID_RADIO,    0 },  \
+    { "persist.ril.stat.usb.reset",    AID_RADIO,    0 }, \
+    { "persist.ril.tool.lastgw",    AID_RADIO,    0 }, \
+    { "persist.ril.tool.lastip",    AID_RADIO,    0 }, \
+    { "persist.ril.tool.lastgw",    AID_RADIO,    0 }, \
+    { "persist.ril.tool.lastip",    AID_RADIO,    0 }, \
+    { "persist.ril.tool.lastgw",    AID_RADIO,    0 }, \
+    { "persist.ril.tool.lastip",    AID_RADIO,    0 }, \
 
 #endif /* DEVICE_PERMS_H */

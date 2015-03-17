@@ -286,6 +286,10 @@ on post-fs-data
     mkdir /data/misc/audit 0777 audit system
     chmod 0777 /data/misc/audit
 
+    # Torch
+    chown system camera /sys/class/leds/led:flash_torch/brightness
+    chmod 0660 /sys/class/leds/led:flash_torch/brightness
+
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init
    class late_start

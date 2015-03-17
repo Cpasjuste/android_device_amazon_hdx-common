@@ -119,6 +119,9 @@
 /dev/hw_random            0600   root       root
 /dev/adsprpc-smd          0664   system     system
 
+/dev/rfkill               0660   root       wifi
+/sys/devices/fb000000.qcom,wcnss-wlan/ieee80211/phy0/rfkill0	state	0660	bluetooth	bluetooth
+
 #permissions for audio
 /dev/audio_slimslave      0660   system     audio
 /dev/msm_qcelp            0660   system     audio

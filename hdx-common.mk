@@ -54,17 +54,28 @@ PRODUCT_PACKAGES += \
 	ueventd.qcom.rc \
 	init.recovery.qcom.rc
 
+# Audio/Media
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/vendor/audio_effects.conf:system/vendor/etc/audio_effects.conf \
+	$(LOCAL_PATH)/configs/audio_effects.conf:system/etc/audio_effects.conf \
+	$(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
+	$(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+	$(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+	$(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths.xml \
+	$(LOCAL_PATH)/configs/mixer_paths.xml:system/etc/mixer_paths_auxpcm.xml
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio_policy.msm8974 \
     audio.primary.msm8974 \
+    libaudioroute \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
-    libqcomvoiceprocessing
+    libqcomvoiceprocessing 
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -94,7 +105,7 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8974
+    gps.default
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -145,18 +156,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	libbt-vendor
 
-PRODUCT_BOOT_JARS += qcmediaplayer
-
-# Torch
-PRODUCT_PACKAGES += Torch
-
-# Wifi
-#PRODUCT_PACKAGES += \
-#    libnetcmdiface \
-#    macloader \
-#    crda \
-#    regulatory.bin \
-#    linville.key.pub.pem
+PRODUCT_BOOT_JARS += \
+	qcmediaplayer
 
 # QC Perf
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -192,6 +193,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	debug.egl.hw=1 \
 	persist.hwc.mdpcomp.enable=true \
 	debug.mdpcomp.logs=0 
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.qc.sdk.izat.premium_enabled=1 \
+	ro.qc.sdk.izat.service_mask=0x0 \
+	persist.gps.qc_nlp_in_use=1 \
+	persist.loc.nlp_name=com.qualcomm.services.location \
+	ro.gps.agps_provider=1
 
 # new props test
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -254,15 +262,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.ril.usb.port.rmnet=rmnet_usb \
 	telephony.sms.receive=true \
 	keyguard.ori.timeout=350
-#	ro.camera.model=Kindle Fire HDX 7" \
-#	DISABLE calfiles as audio volume is too loud
-#	persist.audio.calfile0=/etc/acdbdata/THOR/Bluetooth_cal.acdb \
-#	persist.audio.calfile1=/etc/acdbdata/THOR/General_cal.acdb \
-#	persist.audio.calfile2=/etc/acdbdata/THOR/Global_cal.acdb \
-#	persist.audio.calfile3=/etc/acdbdata/THOR/Handset_cal.acdb \
-#	persist.audio.calfile4=/etc/acdbdata/THOR/Hdmi_cal.acdb \
-#	persist.audio.calfile5=/etc/acdbdata/THOR/Headset_cal.acdb \
-#	persist.audio.calfile6=/etc/acdbdata/THOR/Speaker_cal.acdb \
+
+# MultiUser
+PRODUCT_PROPERTY_OVERRIDES += \
+	fw.max_users=3 \
+	lockscreen.rot_override=true
+
+# CM updater
+PRODUCT_PROPERTY_OVERRIDES += \
+	cm.updater.uri=http://kfirehdx.ddns.net/CyanogenModOTA/api
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 

@@ -1,5 +1,7 @@
 <manifest>
 
+	<project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" remote="github" revision="cm-11.0" />
+
 	<!--twrp recovery -->
 	<remove-project name="CyanogenMod/android_bootable_recovery" />
 	<project path="bootable/recovery" name="omnirom/android_bootable_recovery" remote="github" revision="android-5.0" />
